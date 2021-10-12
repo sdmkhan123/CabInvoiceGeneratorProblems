@@ -81,5 +81,70 @@ namespace CabInvoiceGenerator
             return Math.Max(totalFare, MINIMUM_FARE);
         }
 
+        /// <summary>
+        /// Calculate total fare and Generating Summary of Multiple Ride
+        /// </summary>
+        /// <param name="rides"></param>
+        /// <returns></returns>
+        public InvoiceSummary CalculateFare(Ride[] rides)
+        {
+            double totalFare = 0;
+            try
+            {
+                //Clculate total fare for all rides
+                foreach (Ride ride in rides)
+                {
+                    totalFare += this.CalculateFare(ride.distance, ride.time);
+
+                }
+            }
+            catch (CabInvoiceException)
+            {
+                if (rides == null)
+                {
+                    throw new CabInvoiceException(CabInvoiceException.ExceptionType.NULL_RIDES, "rides are null");
+                }
+
+            }
+            return new InvoiceSummary(rides.Length, totalFare);
+        }
+
+        /// <summary>
+        /// Add ride for UserId
+        /// </summary>
+        /// <param name="userId"></param>
+        /// <param name="rides"></param>
+        public void ADDRides(string userId, Ride[] rides)
+        {
+            try
+            {
+                //Adding Ride To the Specified User
+                rideRepository.AddRide(userId, rides);
+            }
+            catch (CabInvoiceException)
+            {
+                if (rides == null)
+                {
+                    throw new CabInvoiceException(CabInvoiceException.ExceptionType.NULL_RIDES, "rides are null");
+                }
+            }
+        }
+
+        /// <summary>
+        /// To Get Summary By user
+        /// </summary>
+        /// <param name="userId"></param>
+        /// <returns></returns>
+        public InvoiceSummary GetInvoiceSummary(String userId)
+        {
+            try
+            {
+                return this.CalculateFare(rideRepository.getRides(userId));
+            }
+            catch (CabInvoiceException)
+            {
+                throw new CabInvoiceException(CabInvoiceException.ExceptionType.INVALID_USER_ID, "Invalid user id");
+            }
+        }
     }
 }
