@@ -10,7 +10,6 @@ namespace CabInvoiceGenerator
         private int numberOfRides;
         private double totalFare;
         private double averageFare;
-
         /// <summary>
         /// Parametrise constructor for setting data
         /// </summary>
@@ -23,7 +22,13 @@ namespace CabInvoiceGenerator
             this.totalFare = totalFare;
             this.averageFare = this.totalFare / this.numberOfRides;
         }
-
+        public InvoiceSummary(int numberOfRides, double totalFare, double averageFare)
+        {
+            //Setting data
+            this.numberOfRides = numberOfRides;
+            this.totalFare = totalFare;
+            this.averageFare = this.totalFare / this.numberOfRides;
+        }
         /// <summary>
         /// Overriding Equals Method
         /// </summary>
@@ -36,7 +41,6 @@ namespace CabInvoiceGenerator
             InvoiceSummary inputObject = (InvoiceSummary)obj;
             return this.numberOfRides == inputObject.numberOfRides && this.totalFare == inputObject.totalFare && this.averageFare == inputObject.averageFare;
         }
-
         /// <summary>
         /// Overriding GethHashCode Method
         /// </summary>
