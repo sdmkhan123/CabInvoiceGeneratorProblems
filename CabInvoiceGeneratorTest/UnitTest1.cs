@@ -8,16 +8,13 @@ namespace CabInvoiceGeneratorTest
     /// </summary>
     public class Tests
     {
-        //InvoiceGenerator Reference
         InvoiceGenerator invoiceGenerator = null;
-
         /// <summary>
         /// Test cases for checking Calculate fare function
         /// </summary>
         [Test]
         public void GivenDistanceAndTimeShouldReturnTotalFare()
         {
-            //Create Instance of InvoiceGenerator for Normal Ride
             invoiceGenerator = new InvoiceGenerator(RideType.NORMAL);
             double distance = 2.0;
             int time = 5;
@@ -32,10 +29,8 @@ namespace CabInvoiceGeneratorTest
         [Test]
         public void GiveMultipleRidesShouldReturnInvoiceSummary()
         {
-            //Creating Instance of InvoiceGenerator For Normal Rides
             invoiceGenerator = new InvoiceGenerator(RideType.NORMAL);
             Ride[] rides = { new Ride(2.0, 5), new Ride(0.1, 1) };
-            //Generating Summary for Rides
             InvoiceSummary summary = invoiceGenerator.CalculateFare(rides);
             InvoiceSummary expectedSummary = new InvoiceSummary(2, 30.0);
             Assert.AreEqual(expectedSummary, summary);
@@ -49,9 +44,18 @@ namespace CabInvoiceGeneratorTest
             //Creating Instance of InvoiceGenerator For Normal Rides
             invoiceGenerator = new InvoiceGenerator(RideType.NORMAL);
             Ride[] rides = { new Ride(2.0, 5), new Ride(0.1, 1) };
-            //Generating Summary for Rides
             InvoiceSummary summary = invoiceGenerator.CalculateFare(rides);
             InvoiceSummary expectedSummary = new InvoiceSummary(2, 30.0, 15);
+            Assert.AreEqual(expectedSummary, summary);
+        }
+        [Test]
+        public void GivenUserId_WhenInvoivceService_ShouldReturnInvoice()
+        {
+            invoiceGenerator = new InvoiceGenerator(RideType.NORMAL);
+            Ride[] rides = { new Ride(2.0, 5), new Ride(0.1, 1) };
+            invoiceGenerator.ADDRides("101", rides);
+            InvoiceSummary summary = invoiceGenerator.GetInvoiceSummary("101");
+            InvoiceSummary expectedSummary = new InvoiceSummary(2, 30.0, "101");
             Assert.AreEqual(expectedSummary, summary);
         }
     }

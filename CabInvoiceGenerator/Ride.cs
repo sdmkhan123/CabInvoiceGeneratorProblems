@@ -9,10 +9,8 @@ namespace CabInvoiceGenerator
     /// </summary>
     public class Ride
     {
-        //variables
         public double distance;
         public int time;
-
         /// <summary>
         /// Parametrise constructor for setting data
         /// </summary>

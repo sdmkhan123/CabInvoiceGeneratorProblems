@@ -13,7 +13,6 @@ namespace CabInvoiceGenerator
         /// Dictionary to store UserID and Rides into list
         /// </summary>
         Dictionary<string, List<Ride>> userRides = null;
-
         /// <summary>
         /// Constructor to create dictionary
         /// </summary>
@@ -21,7 +20,6 @@ namespace CabInvoiceGenerator
         {
             this.userRides = new Dictionary<string, List<Ride>>();
         }
-
         /// <summary>
         /// Add Ride list to specified UserID
         /// </summary>
@@ -44,7 +42,6 @@ namespace CabInvoiceGenerator
                 throw new CabInvoiceException(CabInvoiceException.ExceptionType.NULL_RIDES, "Rides are null");
             }
         }
-
         /// <summary>
         /// Get Ride list as an array for specified UserId
         /// </summary>
@@ -52,7 +49,6 @@ namespace CabInvoiceGenerator
         /// <returns></returns>
         public Ride[] getRides(string userId)
         {
-
             try
             {
                 return this.userRides[userId].ToArray();

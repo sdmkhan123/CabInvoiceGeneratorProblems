@@ -12,12 +12,10 @@ namespace CabInvoiceGenerator
         //variables
         RideType rideType;
         private RideRepository rideRepository;
-
         //constant
         private readonly double MINIMUM_COST_PER_KM;
         private readonly int COST_PER_TIME;
         private readonly double MINIMUM_FARE;
-
         /// <summary>
         /// Constructor to create RideRepository Instance
         /// </summary>
@@ -48,7 +46,6 @@ namespace CabInvoiceGenerator
                 throw new CabInvoiceException(CabInvoiceException.ExceptionType.INVALID_RIDE_TYPE, "Invalid ride type");
             }
         }
-
         /// <summary>
         /// Calcuating the fare
         /// </summary>
@@ -108,7 +105,6 @@ namespace CabInvoiceGenerator
             }
             return new InvoiceSummary(rides.Length, totalFare);
         }
-
         /// <summary>
         /// Add ride for UserId
         /// </summary>
@@ -129,7 +125,6 @@ namespace CabInvoiceGenerator
                 }
             }
         }
-
         public InvoiceSummary CalculateFare(Ride[] rides, int numOfRides, double averageFarePerRide)
         {
             double totalFare = 0;
@@ -152,7 +147,6 @@ namespace CabInvoiceGenerator
             }
             return new InvoiceSummary(rides.Length, totalFare, averageFarePerRide);
         }
-
         /// <summary>
         /// To Get Summary By user
         /// </summary>
